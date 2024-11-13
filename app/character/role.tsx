@@ -1,23 +1,25 @@
-function RoleForm() {
-    return (
-        <form>
-            <label htmlFor="role">Choose a Role</label>
-            <select id="role">
-                <option value="rockerboy">Rockerboy</option>
-                <option value="solo">Solo</option>
-                <option value="netrunner">Netrunner</option>
-                <option value="tech">Tech</option>
-                <option value="medtech">Medtech</option>
-                <option value="media">Media</option>
-                <option value="exec">Exec</option>
-                <option value="lawmen">Lawmen</option>
-                <option value="fixer">Fixer</option>
-                <option value="nomad">Nomad</option>
-            </select>
-            <button type="submit">Submit</button>
-        </form>
-        // Should have corresponding component to describe what role does in lore
-    )
+import { useForm } from 'react-hook-form';
+
+interface RoleFormData {
+  role: string;
 }
 
-export default RoleForm
+interface RoleFormProps {
+  data: RoleFormData;
+  onFormSubmit: (data: RoleFormData) => void;
+}
+
+export default function RoleForm({ data, onFormSubmit }: RoleFormProps) {
+  const { register, handleSubmit, formState: { errors } } = useForm<RoleFormData>({
+    defaultValues: data
+  });
+
+  return (
+    <form onSubmit={handleSubmit(onFormSubmit)}>
+      <input {...register("role", { required: 'Role is required' })} />
+      {errors.role && <span>{errors.role.message}</span>}
+      
+      <button type="submit">Next</button>
+    </form>
+  );
+}

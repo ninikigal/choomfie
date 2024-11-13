@@ -1,8 +1,7 @@
-import { useForm } from 'react-hook-form';
+"use client"
 
-interface RoleFormData {
-  role: string;
-}
+import { useForm } from 'react-hook-form';
+import { RoleFormData } from './formTypes';
 
 interface RoleFormProps {
   data: RoleFormData;

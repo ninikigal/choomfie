@@ -1,29 +1,27 @@
 "use client"
-import { useForm } from "react-hook-form";
 
-interface LifePathFormData {
-    culturalorigin: string;
-}
+import { useForm } from "react-hook-form";
+import { LifepathFormData } from "./formTypes";
 
 interface LifepathFormProps {
-    data: LifePathFormData;
-    onFormSubmit: (data: LifePathFormData) => void;
+    data: LifepathFormData;
+    onFormSubmit: (data: LifepathFormData) => void;
     onPreviousClick: () => void;
 }
 
 export default function LifepathForm({ data, onFormSubmit, onPreviousClick}: LifepathFormProps) {
-    const { register, handleSubmit } = useForm<LifePathFormData>({
+    const { register, handleSubmit } = useForm<LifepathFormData>({
         defaultValues: data
     })
 
     return (
         <form onSubmit={handleSubmit(onFormSubmit)}>
             {/* Cultural Origins */}
-            <label htmlFor="culturalorigin">Your Cultural Region</label>
+            <label htmlFor="cultural-origin">Your Cultural Region</label>
             <input
-                id="culturalorigin" 
+                id="cultural-origin" 
                 type="text"
-                {...register("culturalorigin")}
+                {...register("culturalOrigin")}
             />
 
             {/* Personality */}

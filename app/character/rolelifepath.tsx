@@ -1,4 +1,4 @@
-export default function RoleLifepath({ onSubmit }) {
+export default function RoleLifepath() {
     return (
         <form>
             <label htmlFor="test">Test</label>

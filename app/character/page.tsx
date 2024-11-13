@@ -1,12 +1,14 @@
 "use client"
 import { useReducer } from "react";
+import { RoleFormData, LifepathFormData, createEmptyStepData } from "./formTypes";
+
 import RoleForm from "./role";
 import LifepathForm from "./lifepath";
 import RoleLifepath from "./rolelifepath";
 
 interface FormData {
-    step1: { role: string }
-    step2: { culturalorigin: string }
+    step1: RoleFormData,
+    step2: LifepathFormData
 }
 
 type FormAction = 
@@ -16,8 +18,8 @@ type FormAction =
 
 const initialState: FormData & { currentStep: number } = {
     currentStep: 1, 
-    step1: { role: "" },
-    step2: { culturalorigin: "" }
+    step1: createEmptyStepData("role"),
+    step2: createEmptyStepData("lifepath")
 }
 
 function formReducer(state: typeof initialState, action: FormAction) {
@@ -65,6 +67,9 @@ export default function CharacterPage() {
                     onFormSubmit={(data) => handleStepSubmit("step2", data)}
                     onPreviousClick={() => handlePrevStep()}
                 />
+            )}
+            {state.currentStep === 3 && (
+                <button onClick={handlePrevStep}>goback</button>
             )}
 
             {/* Debug section */}

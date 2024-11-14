@@ -37,10 +37,12 @@ export interface LifepathFormData {
     goal: string | null;
 }
 
+export type CultureFormData = Pick<LifepathFormData, "culturalOrigin" | "languages">
+
 export type FormData = {
     role: RoleFormData;
     lifepath: LifepathFormData;
-  };
+}
 
 export function createEmptyStepData<T extends keyof FormData>(step: T): FormData[T] {
     switch(step) {

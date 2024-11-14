@@ -1,8 +1,7 @@
 "use client"
 
-import { Control, Controller, useController, UseFormWatch } from "react-hook-form";
 import { useState } from "react";
-import { CultureFormData, LifepathFormData } from "./formTypes";
+import { LifepathFormData } from "./formTypes";
 
 interface Culture {
     name: string
@@ -27,11 +26,10 @@ const cultures: Culture[] = [
 ]
 
 interface CulturalSelectorProps {
-    control: Control<LifepathFormData>;
     setValue: (field: keyof LifepathFormData, value: any) => void;
 }
 
-export default function CulturalSelector({control, setValue}: CulturalSelectorProps) {
+export default function CulturalSelector({setValue}: CulturalSelectorProps) {
     const [selectedCulture, setSelectedCulture] = useState<Culture | null>(null)
 
     return (

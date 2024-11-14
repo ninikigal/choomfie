@@ -11,7 +11,7 @@ interface LifepathFormProps {
 }
 
 export default function LifepathForm({ data, onFormSubmit, onPreviousClick}: LifepathFormProps) {
-    const { register, control, setValue, handleSubmit } = useForm<LifepathFormData>({
+    const { register, setValue, handleSubmit } = useForm<LifepathFormData>({
         defaultValues: data
     })
 
@@ -22,7 +22,7 @@ export default function LifepathForm({ data, onFormSubmit, onPreviousClick}: Lif
     return (
         <form onSubmit={handleSubmit(onFormSubmit)}>
             {/* Cultural Origins */}
-            <CulturalSelector control={control} setValue={setValue} />
+            <CulturalSelector setValue={setValue} />
             {/* <label htmlFor="cultural-origin">Your Cultural Region</label>
             <input
                 id="cultural-origin" 

@@ -24,7 +24,7 @@ export interface LifepathFormData {
     clothingStyle: string | null;
     hairstyle: string | null;
     affectation: string | null;
-    valueMost: string | null;
+    valueMostCore: string | null;
     feelingsOfPeople: string | null;
     valueMostPerson: string | null;
     valueMostPossession: string | null;
@@ -56,7 +56,7 @@ export function createEmptyStepData<T extends keyof FormData>(step: T): FormData
                 clothingStyle: null,
                 hairstyle: null,
                 affectation: null,
-                valueMost: null,
+                valueMostCore: null,
                 feelingsOfPeople: null,
                 valueMostPerson: null,
                 valueMostPossession: null,

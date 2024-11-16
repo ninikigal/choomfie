@@ -1,9 +1,10 @@
 export interface RoleFormData {
-    role: string;
+    role: string
 }
 
-interface FriendFormData {
-    relationship: string;
+export interface FriendFormData {
+    id: number
+    relationship: string | null;
 }
 
 interface EnemyFormData {

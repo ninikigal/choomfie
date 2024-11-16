@@ -15,6 +15,9 @@ import FamilyBackgroundSelector from "./selectors/FamilyBackgroundSelector";
 import ChildhoodEnvironmentSelector from "./selectors/ChildhoodEnvironmentSelector";
 import FamilyCrisisSelector from "./selectors/FamilyCrisisSelector";
 import FriendsSelector from "./selectors/FriendsSelector";
+import EnemiesSelector from "./selectors/EnemiesSelector";
+import TragicLoveAffairSelector from "./selectors/TragicLoveAffairSelector";
+import LifeGoalSelector from "./selectors/LifeGoalSelector";
 
 interface LifepathFormProps {
     data: LifepathFormData;
@@ -23,7 +26,7 @@ interface LifepathFormProps {
 }
 
 export default function LifepathForm({ data, onFormSubmit, onPreviousClick}: LifepathFormProps) {
-    const [subStep, setSubStep] = useState<number>(1);
+    const [subStep, setSubStep] = useState<number>(15);
 
     const { setValue, handleSubmit } = useForm<LifepathFormData>({
         defaultValues: data
@@ -100,23 +103,18 @@ export default function LifepathForm({ data, onFormSubmit, onPreviousClick}: Lif
             }
             {/* Your Enemies */}
             {
-                subStep === 13
-                // Add component for "Your Enemies"
-            }
-            {/* Sweet Revenge */}
-            {
-                subStep === 14
-                // Add component for "Sweet Revenge"
+                subStep === 13 &&
+                <EnemiesSelector setValue={setValue} onPrev={goToPrevStep} onNext={goToNextStep}/>
             }
             {/* Tragic Love Affair(s) */}
             {
-                subStep === 15
-                // Add component for "Tragic Love Affair(s)"
+                subStep === 14 &&
+                <TragicLoveAffairSelector setValue={setValue} onPrev={goToPrevStep} onNext={goToNextStep}/>
             }
             {/* Life Goals */}
             {
-                subStep === 16
-                // Add component for "Life Goals"
+                subStep === 15 &&
+                <LifeGoalSelector setValue={setValue} onPrev={goToPrevStep} onNext={goToNextStep}/>
             }
             <button type="submit">Submit</button>
             <button onClick={onPreviousClick}>Back</button>

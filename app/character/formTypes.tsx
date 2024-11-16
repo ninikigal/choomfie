@@ -3,19 +3,21 @@ export interface RoleFormData {
 }
 
 export interface FriendFormData {
-    id: number
+    id: number;
     relationship: string | null;
 }
 
-interface EnemyFormData {
-    type: string;
-    cause: string;
-    threat: string;
-    revenge: string;
+export interface EnemyFormData {
+    id: number;
+    type: string | null;
+    cause: string | null;
+    threat: string | null;
+    revenge: string | null;
 }
 
-interface TragicLoveAffairFormData {
-    end: string;
+export interface TragicLoveAffairFormData {
+    id: number;
+    end: string | null;
 }
 
 export interface LifepathFormData {

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { LifepathFormData } from "./formTypes";
+import { LifepathFormData } from "../formTypes";
 
 type Personality = string;
 

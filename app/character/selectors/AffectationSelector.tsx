@@ -1,6 +1,6 @@
 "use client"
 
-import { LifepathFormData } from "./formTypes";
+import { LifepathFormData } from "../formTypes";
 
 interface AffectationSelectorProps {
     setValue: (field: keyof LifepathFormData, value: string) => void;

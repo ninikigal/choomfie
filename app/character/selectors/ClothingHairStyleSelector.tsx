@@ -1,7 +1,6 @@
 "use client"
 
-import { useState } from "react";
-import { LifepathFormData } from "./character/formTypes"
+import { LifepathFormData } from "../formTypes"
 
 interface ClothingStyleSelectorProps {
     setValue: (field: keyof LifepathFormData, value: string) => void
@@ -12,7 +11,7 @@ interface ClothingStyleSelectorProps {
 type ClothingStyle = string;
 
 const clothingStyles: ClothingStyle[] = [
-    "Generic Chic (Standard, Colorful, Modular)",
+    "Generic Chic (Standard, Colorful, Modular)",   
     "Leisurewear (Comfort, Agility, Athleticism)",
     "Urban Flash (Flashy, Technological, Streetwear)",
     "Businesswear (Leadership, Presence, Authority)",

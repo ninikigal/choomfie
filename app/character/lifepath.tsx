@@ -3,11 +3,18 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { LifepathFormData } from "./formTypes";
-import CulturalSelector from "./CulturalSelector";
-import PersonalitySelector from "./PersonalitySelector";
-import ClothingHairStyleSelector from "../ClothingHairStyleSelector";
-import AffectationSelector from "./AffectationSelector";
-import CoreValueSelector from "./CoreValueSelector";
+import CulturalSelector from "./selectors/CulturalSelector";
+import PersonalitySelector from "./selectors/PersonalitySelector";
+import ClothingHairStyleSelector from "./selectors/ClothingHairStyleSelector";
+import AffectationSelector from "./selectors/AffectationSelector";
+import CoreValueSelector from "./selectors/CoreValueSelector";
+import FeelingsOfPeopleSelector from "./selectors/FeelingsOfPeopleSelector";
+import PersonValueSelector from "./selectors/PersonValueSelector";
+import PossessionValueSelector from "./selectors/PossessionValueSelector";
+import FamilyBackgroundSelector from "./selectors/FamilyBackgroundSelector";
+import ChildhoodEnvironmentSelector from "./selectors/ChildhoodEnvironmentSelector";
+import FamilyCrisisSelector from "./selectors/FamilyCrisisSelector";
+import FriendsSelector from "./selectors/FriendsSelector";
 
 interface LifepathFormProps {
     data: LifepathFormData;
@@ -59,56 +66,56 @@ export default function LifepathForm({ data, onFormSubmit, onPreviousClick}: Lif
             {/* How Do You Feel About Most People? */}
             {
                 subStep === 6 &&
-                // Add component for "How Do You Feel About Most People?"
+                <FeelingsOfPeopleSelector setValue={setValue} onPrev={goToPrevStep} onNext={goToNextStep}/>
             }
             {/* Most Valued Person in Your Life? */}
             {
-                subStep === 7 &&
-                // Add component for "Most Valued Person in Your Life?"
+                subStep === 7 && 
+                <PersonValueSelector setValue={setValue} onPrev={goToPrevStep} onNext={goToNextStep}/>
             }
             {/* Most Valued Possession You Own? */}
             {
                 subStep === 8 &&
-                // Add component for "Most Valued Possession You Own?"
+                <PossessionValueSelector setValue={setValue} onPrev={goToPrevStep} onNext={goToNextStep}/>
             }
             {/* Original Family Background */}
             {
-                subStep === 9 &&
-                // Add component for "Original Family Background"
+                subStep === 9 && 
+                <FamilyBackgroundSelector setValue={setValue} onPrev={goToPrevStep} onNext={goToNextStep}/>
             }
             {/* Environment */}
             {
                 subStep === 10 &&
-                // Add component for "Environment"
+                <ChildhoodEnvironmentSelector setValue={setValue} onPrev={goToPrevStep} onNext={goToNextStep}/>
             }
             {/* Family Crisis */}
             {
                 subStep === 11 &&
-                // Add component for "Family Crisis"
+                <FamilyCrisisSelector setValue={setValue} onPrev={goToPrevStep} onNext={goToNextStep}/>
             }
             {/* Your Friends */}
             {
                 subStep === 12 &&
-                // Add component for "Your Friends"
+                <FriendsSelector setValue={setValue} onPrev={goToPrevStep} onNext={goToNextStep}/>
             }
             {/* Your Enemies */}
             {
-                subStep === 13 &&
+                subStep === 13
                 // Add component for "Your Enemies"
             }
             {/* Sweet Revenge */}
             {
-                subStep === 14 &&
+                subStep === 14
                 // Add component for "Sweet Revenge"
             }
             {/* Tragic Love Affair(s) */}
             {
-                subStep === 15 &&
+                subStep === 15
                 // Add component for "Tragic Love Affair(s)"
             }
             {/* Life Goals */}
             {
-                subStep === 16 &&
+                subStep === 16
                 // Add component for "Life Goals"
             }
             <button type="submit">Submit</button>

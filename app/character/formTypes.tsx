@@ -1,5 +1,5 @@
 export interface RoleFormData {
-    role: string
+    role: "" | "rockerboy" | "solo"
 }
 
 export interface FriendFormData {
@@ -40,14 +40,33 @@ export interface LifepathFormData {
     goal: string | null;
 }
 
+export interface RockerLifepathFormData {
+    type: string | null;
+    isInGroup: string | null;
+    wasInGroup: string | null;
+    leavingReason: string | null;
+    performingVenue: string | null;
+    opposition: string | null;
+}
+
+export interface SoloLifepathFormData {
+    type: string | null;
+    moralCompass: string | null;
+    territory: string | null;
+    opposition: string | null;
+}
+
 export type CultureFormData = Pick<LifepathFormData, "culturalOrigin" | "languages">
 
 export type FormData = {
     role: RoleFormData;
     lifepath: LifepathFormData;
+    roleLifepath:
+        | RockerLifepathFormData
+        | SoloLifepathFormData;
 }
 
-export function createEmptyStepData<T extends keyof FormData>(step: T): FormData[T] {
+export function createEmptyStepData<T extends keyof FormData>(step: T, role?: string): FormData[T] {
     switch(step) {
         case "role":
             return { role: "" } as FormData[T];
@@ -71,6 +90,31 @@ export function createEmptyStepData<T extends keyof FormData>(step: T): FormData
                 lovers: null,
                 goal: null,
             } as FormData[T];
+        case "roleLifepath":
+            switch(role) {
+                case "": 
+                    return {
+                        type: null
+                    } as FormData[T]
+                case "rockerboy":
+                    return {
+                        type: null,
+                        isInGroup: null,
+                        wasInGroup: null,
+                        leavingReason: null,
+                        performingVenue: null,
+                        opposition: null,
+                    } as FormData[T]
+                case "solo":
+                    return {
+                        type: null,
+                        moralCompass: null,
+                        territory: null,
+                        opposition: null,
+                    } as FormData[T]
+                default:
+                    throw new Error(`Unknown role ${role}`);
+            }
         default:
             throw new Error(`Unknown Step ${step}`);
     }

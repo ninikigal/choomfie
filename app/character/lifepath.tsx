@@ -3,21 +3,21 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { LifepathFormData } from "./formTypes";
-import CulturalSelector from "./selectors/CulturalSelector";
-import PersonalitySelector from "./selectors/PersonalitySelector";
-import ClothingHairStyleSelector from "./selectors/ClothingHairStyleSelector";
-import AffectationSelector from "./selectors/AffectationSelector";
-import CoreValueSelector from "./selectors/CoreValueSelector";
-import FeelingsOfPeopleSelector from "./selectors/FeelingsOfPeopleSelector";
-import PersonValueSelector from "./selectors/PersonValueSelector";
-import PossessionValueSelector from "./selectors/PossessionValueSelector";
-import FamilyBackgroundSelector from "./selectors/FamilyBackgroundSelector";
-import ChildhoodEnvironmentSelector from "./selectors/ChildhoodEnvironmentSelector";
-import FamilyCrisisSelector from "./selectors/FamilyCrisisSelector";
-import FriendsSelector from "./selectors/FriendsSelector";
-import EnemiesSelector from "./selectors/EnemiesSelector";
-import TragicLoveAffairSelector from "./selectors/TragicLoveAffairSelector";
-import LifeGoalSelector from "./selectors/LifeGoalSelector";
+import CulturalSelector from "./lifepath-selectors/CulturalSelector";
+import PersonalitySelector from "./lifepath-selectors/PersonalitySelector";
+import ClothingHairStyleSelector from "./lifepath-selectors/ClothingHairStyleSelector";
+import AffectationSelector from "./lifepath-selectors/AffectationSelector";
+import CoreValueSelector from "./lifepath-selectors/CoreValueSelector";
+import FeelingsOfPeopleSelector from "./lifepath-selectors/FeelingsOfPeopleSelector";
+import PersonValueSelector from "./lifepath-selectors/PersonValueSelector";
+import PossessionValueSelector from "./lifepath-selectors/PossessionValueSelector";
+import FamilyBackgroundSelector from "./lifepath-selectors/FamilyBackgroundSelector";
+import ChildhoodEnvironmentSelector from "./lifepath-selectors/ChildhoodEnvironmentSelector";
+import FamilyCrisisSelector from "./lifepath-selectors/FamilyCrisisSelector";
+import FriendsSelector from "./lifepath-selectors/FriendsSelector";
+import EnemiesSelector from "./lifepath-selectors/EnemiesSelector";
+import TragicLoveAffairSelector from "./lifepath-selectors/TragicLoveAffairSelector";
+import LifeGoalSelector from "./lifepath-selectors/LifeGoalSelector";
 
 interface LifepathFormProps {
     data: LifepathFormData;

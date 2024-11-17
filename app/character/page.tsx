@@ -1,14 +1,16 @@
 "use client"
 import { useReducer } from "react";
-import { RoleFormData, LifepathFormData, createEmptyStepData } from "./formTypes";
+import { RoleFormData, LifepathFormData, createEmptyStepData, RockerLifepathFormData, SoloLifepathFormData } from "./formTypes";
 
 import RoleForm from "./role";
 import LifepathForm from "./lifepath";
-import RoleLifepath from "./rolelifepath";
 
 interface FormData {
     step1: RoleFormData,
     step2: LifepathFormData
+    step3:
+        | RockerLifepathFormData
+        | SoloLifepathFormData
 }
 
 type FormAction = 
@@ -19,14 +21,23 @@ type FormAction =
 const initialState: FormData & { currentStep: number } = {
     currentStep: 1, 
     step1: createEmptyStepData("role"),
-    step2: createEmptyStepData("lifepath")
+    step2: createEmptyStepData("lifepath"),
+    step3: createEmptyStepData("roleLifepath", "")
 }
 
 function formReducer(state: typeof initialState, action: FormAction) {
     switch (action.type) {
         case "UPDATE_STEP":
-            return { ...state, [action.step]: {
-                ...state[action.step], ...action.data} };
+            return { 
+                ...state,
+                [action.step]: {
+                    ...state[action.step], 
+                    ...action.data
+                },
+                ...(action.step === "step1" && {
+                    step3: createEmptyStepData("roleLifepath", state.step1.role as string),
+                }),
+            };
         case "NEXT_STEP":
             return { ...state, currentStep: Math.min(state.currentStep + 1, 3) };
         case "PREV_STEP":
@@ -69,7 +80,11 @@ export default function CharacterPage() {
                 />
             )}
             {state.currentStep === 3 && (
-                <button onClick={handlePrevStep}>goback</button>
+                <div>
+                    {state.step1.role === "rockerboy" && <p>Rendering Rockerboy-specific form</p>}
+                    {state.step1.role === "solo" && <p>Rendering Solo-specific form</p>}
+                    <button onClick={handlePrevStep}>goback</button>
+                </div>
             )}
 
             {/* Debug section */}

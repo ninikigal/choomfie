@@ -4,6 +4,8 @@ import { RoleFormData, LifepathFormData, createEmptyStepData, RockerLifepathForm
 
 import RoleForm from "./role";
 import LifepathForm from "./lifepath";
+import SoloLifepathForm from "./role-forms/SoloLifepathForm";
+import RockerLifepathForm from "./role-forms/RockerboyLifepathForm";
 
 interface FormData {
     step1: RoleFormData,
@@ -81,11 +83,24 @@ export default function CharacterPage() {
             )}
             {state.currentStep === 3 && (
                 <div>
-                    {state.step1.role === "rockerboy" && <p>Rendering Rockerboy-specific form</p>}
-                    {state.step1.role === "solo" && <p>Rendering Solo-specific form</p>}
+                    {state.step1.role === "solo" && (
+                        <SoloLifepathForm
+                            data={state.step3 as SoloLifepathFormData}
+                            onFormSubmit={(data) => handleStepSubmit("step3", data)}
+                            onPreviousClick={() => handlePrevStep()}
+                        />
+                    )}
+                    {state.step1.role === "rockerboy" &&
+                        <RockerLifepathForm
+                        data={state.step3 as RockerLifepathFormData}
+                        onFormSubmit={(data) => handleStepSubmit("step3", data)}
+                        onPreviousClick={() => handlePrevStep()}
+                        />
+                    }
                     <button onClick={handlePrevStep}>goback</button>
                 </div>
             )}
+            {state.currentStep === 4 && <h1>done brah</h1>}
 
             {/* Debug section */}
             <div style={{ marginTop: '20px', padding: '10px', border: '1px solid #ccc' }}>

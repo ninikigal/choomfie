@@ -8,15 +8,35 @@ interface RoleFormProps {
   onFormSubmit: (data: RoleFormData) => void;
 }
 
+const roles = [
+  "rockerboy", 
+  "solo", 
+  "netrunner", 
+  "tech", 
+  "medtech",
+  "media", 
+  "exec", 
+  "lawman", 
+  "fixer", 
+  "nomad"
+];
+
 export default function RoleForm({ data, onFormSubmit }: RoleFormProps) {
-  const { register, handleSubmit, formState: { errors } } = useForm<RoleFormData>({
+  const { setValue, handleSubmit } = useForm<RoleFormData>({
     defaultValues: data
   });
 
   return (
     <form onSubmit={handleSubmit(onFormSubmit)}>
-      <input {...register("role", { required: 'Role is required' })} />
-      {errors.role && <span>{errors.role.message}</span>}
+      {roles.map((role) => (
+        <button
+          type="button"
+          key={role}
+          onClick={() => setValue("role", role as RoleFormData["role"])}
+        >
+          {role}
+        </button>
+      ))}
       
       <button type="submit">Next</button>
     </form>

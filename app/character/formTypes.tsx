@@ -1,5 +1,7 @@
 export interface RoleFormData {
-    role: "" | "rockerboy" | "solo"
+    role: "" 
+    | "rockerboy" | "solo" | "netrunner" | "tech" | "medtech"
+    | "media" | "exec" | "lawman" | "fixer" | "nomad"
 }
 
 export interface FriendFormData {
@@ -42,8 +44,8 @@ export interface LifepathFormData {
 
 export interface RockerLifepathFormData {
     type: string | null;
-    isInGroup: string | null;
-    wasInGroup: string | null;
+    isInGroup: boolean | null;
+    wasInGroup: boolean | null;
     leavingReason: string | null;
     performingVenue: string | null;
     opposition: string | null;

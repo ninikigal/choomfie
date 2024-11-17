@@ -35,7 +35,7 @@ function formReducer(state: typeof initialState, action: FormAction) {
                     ...action.data
                 },
                 ...(action.step === "step1" && {
-                    step3: createEmptyStepData("roleLifepath", state.step1.role as string),
+                    step3: createEmptyStepData("roleLifepath", (action.data as RoleFormData).role || ""),
                 }),
             };
         case "NEXT_STEP":

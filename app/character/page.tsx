@@ -1,6 +1,6 @@
 "use client"
 import { useReducer } from "react";
-import { RoleFormData, LifepathFormData, createEmptyStepData, RockerLifepathFormData, SoloLifepathFormData, NetrunnerLifepathFormData, TechLifepathFormData, MedtechLifepathFormData } from "./formTypes";
+import { RoleFormData, LifepathFormData, createEmptyStepData, RockerLifepathFormData, SoloLifepathFormData, NetrunnerLifepathFormData, TechLifepathFormData, MedtechLifepathFormData, MediaLifepathFormData, ExecLifepathFormData, LawmanLifepathFormData, FixerLifepathFormData, NomadLifepathFormData } from "./formTypes";
 
 import RoleForm from "./role";
 import LifepathForm from "./lifepath";
@@ -9,6 +9,11 @@ import RockerLifepathForm from "./role-forms/RockerboyLifepathForm";
 import NetrunnerLifepathForm from "./role-forms/NetrunnerLifepathForm";
 import TechLifepathForm from "./role-forms/TechLifepathForm";
 import MedtechLifepathForm from "./role-forms/MedtechLifepathForm";
+import MediaLifepathForm from "./role-forms/MediaLifepathForm";
+import ExecLifepathForm from "./role-forms/ExecLifepathForm";
+import LawmanLifepathForm from "./role-forms/LawmanLifepathForm";
+import FixerLifepathForm from "./role-forms/FixerLifepathForm";
+import NomadLifepathForm from "./role-forms/NomadLifepathForm";
 
 interface FormData {
     step1: RoleFormData,
@@ -19,6 +24,11 @@ interface FormData {
         | NetrunnerLifepathFormData
         | TechLifepathFormData
         | MedtechLifepathFormData
+        | MediaLifepathFormData
+        | ExecLifepathFormData
+        | LawmanLifepathFormData
+        | FixerLifepathFormData
+        | NomadLifepathFormData
 }
 
 type FormAction = 
@@ -120,6 +130,41 @@ export default function CharacterPage() {
                     {state.step1.role === "medtech" &&
                         <MedtechLifepathForm
                         data={state.step3 as MedtechLifepathFormData}
+                        onFormSubmit={(data) => handleStepSubmit("step3", data)}
+                        onPreviousClick={() => handlePrevStep()}
+                        />
+                    }
+                    {state.step1.role === "media" &&
+                        <MediaLifepathForm
+                        data={state.step3 as MediaLifepathFormData}
+                        onFormSubmit={(data) => handleStepSubmit("step3", data)}
+                        onPreviousClick={() => handlePrevStep()}
+                        />
+                    }
+                    {state.step1.role === "exec" &&
+                        <ExecLifepathForm
+                        data={state.step3 as ExecLifepathFormData}
+                        onFormSubmit={(data) => handleStepSubmit("step3", data)}
+                        onPreviousClick={() => handlePrevStep()}
+                        />
+                    }
+                    {state.step1.role === "lawman" &&
+                        <LawmanLifepathForm
+                        data={state.step3 as LawmanLifepathFormData}
+                        onFormSubmit={(data) => handleStepSubmit("step3", data)}
+                        onPreviousClick={() => handlePrevStep()}
+                        />
+                    }
+                    {state.step1.role === "fixer" &&
+                        <FixerLifepathForm
+                        data={state.step3 as FixerLifepathFormData}
+                        onFormSubmit={(data) => handleStepSubmit("step3", data)}
+                        onPreviousClick={() => handlePrevStep()}
+                        />
+                    }
+                    {state.step1.role === "nomad" &&
+                        <NomadLifepathForm
+                        data={state.step3 as NomadLifepathFormData}
                         onFormSubmit={(data) => handleStepSubmit("step3", data)}
                         onPreviousClick={() => handlePrevStep()}
                         />

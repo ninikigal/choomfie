@@ -2,23 +2,23 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { SoloLifepathFormData } from "../formTypes";
+import { MediaLifepathFormData } from "../formTypes";
 import TypeSelector from "./media-lifepath-selectors/TypeSelector";
 import PublicationSelector from "./media-lifepath-selectors/PublicationSelector";
 import EthicsSelector from "./media-lifepath-selectors/EthicsSelector";
 import StoriesSelector from "./media-lifepath-selectors/StoriesSelector";
 
-interface SoloLifepathFormProps {
-    data: SoloLifepathFormData;
-    onFormSubmit: (data: SoloLifepathFormData) => void;
+interface MediaLifepathFormProps {
+    data: MediaLifepathFormData;
+    onFormSubmit: (data: MediaLifepathFormData) => void;
     onPreviousClick: () => void;
 }
 
-export default function SoloLifepathForm({data, onFormSubmit, onPreviousClick}: SoloLifepathFormProps) {
+export default function MediaLifepathForm({data, onFormSubmit, onPreviousClick}: MediaLifepathFormProps) {
 
     const [subStep, setSubStep] = useState(1);
 
-    const { setValue, handleSubmit } = useForm<SoloLifepathFormData>({
+    const { setValue, handleSubmit } = useForm<MediaLifepathFormData>({
         defaultValues: data
     })
 

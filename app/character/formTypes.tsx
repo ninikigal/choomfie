@@ -94,6 +94,41 @@ export interface MediaLifepathFormData {
     story: string | null;
 }
 
+export interface ExecLifepathFormData {
+    type: string | null;
+    division: string | null;
+    morals: string | null;
+    based: string | null;
+    opposition: string | null;
+    bossStanding: string | null;
+}
+
+export interface LawmanLifepathFormData {
+    positions: string | null;
+    jurisdiction: string | null;
+    corrupt: string | null;
+    opposition: string | null;
+    target: string | null;
+}
+
+export interface FixerLifepathFormData {
+    type: string | null;
+    hasPartner: boolean | null;
+    partnerType: string | null;
+    workspace: string | null;
+    clients: string | null;
+    opposition: string | null;
+}
+
+export interface NomadLifepathFormData {
+    packSize: string | null;
+    workType: string | null;
+    work: string | null;
+    type: string | null;
+    philosophy: string | null;
+    opposition: string | null;
+}
+
 export type CultureFormData = Pick<LifepathFormData, "culturalOrigin" | "languages">
 
 export type FormData = {
@@ -106,6 +141,10 @@ export type FormData = {
         | TechLifepathFormData
         | MedtechLifepathFormData
         | MediaLifepathFormData
+        | ExecLifepathFormData
+        | LawmanLifepathFormData
+        | FixerLifepathFormData
+        | NomadLifepathFormData
 }
 
 export function createEmptyStepData<T extends keyof FormData>(step: T, role?: string): FormData[T] {
@@ -189,6 +228,41 @@ export function createEmptyStepData<T extends keyof FormData>(step: T, role?: st
                         publication: null,
                         ethics: null,
                         story: null,
+                    } as FormData[T]
+                case "exec":
+                    return {
+                        type: null,
+                        division: null,
+                        morals: null,
+                        based: null,
+                        opposition: null,
+                        bossStanding: null
+                    } as FormData[T]
+                case "lawman":
+                    return {
+                        positions: null,
+                        jurisdiction: null,
+                        corrupt: null,
+                        opposition: null,
+                        target: null
+                    } as FormData[T]
+                case "fixer":
+                    return {
+                        type: null,
+                        hasPartner: null,
+                        partnerType: null,
+                        workspace: null,
+                        clients: null,
+                        opposition: null
+                    } as FormData[T]
+                case "nomad":
+                    return {
+                        packSize: null,
+                        workType: null,
+                        work: null,
+                        type: null,
+                        philosophy: null,
+                        opposition: null
                     } as FormData[T]
                 default:
                     throw new Error(`Unknown role ${role}`);

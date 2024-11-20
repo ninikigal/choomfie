@@ -1,11 +1,14 @@
 "use client"
 import { useReducer } from "react";
-import { RoleFormData, LifepathFormData, createEmptyStepData, RockerLifepathFormData, SoloLifepathFormData } from "./formTypes";
+import { RoleFormData, LifepathFormData, createEmptyStepData, RockerLifepathFormData, SoloLifepathFormData, NetrunnerLifepathFormData, TechLifepathFormData, MedtechLifepathFormData } from "./formTypes";
 
 import RoleForm from "./role";
 import LifepathForm from "./lifepath";
 import SoloLifepathForm from "./role-forms/SoloLifepathForm";
 import RockerLifepathForm from "./role-forms/RockerboyLifepathForm";
+import NetrunnerLifepathForm from "./role-forms/NetrunnerLifepathForm";
+import TechLifepathForm from "./role-forms/TechLifepathForm";
+import MedtechLifepathForm from "./role-forms/MedtechLifepathForm";
 
 interface FormData {
     step1: RoleFormData,
@@ -13,6 +16,9 @@ interface FormData {
     step3:
         | RockerLifepathFormData
         | SoloLifepathFormData
+        | NetrunnerLifepathFormData
+        | TechLifepathFormData
+        | MedtechLifepathFormData
 }
 
 type FormAction = 
@@ -93,6 +99,27 @@ export default function CharacterPage() {
                     {state.step1.role === "rockerboy" &&
                         <RockerLifepathForm
                         data={state.step3 as RockerLifepathFormData}
+                        onFormSubmit={(data) => handleStepSubmit("step3", data)}
+                        onPreviousClick={() => handlePrevStep()}
+                        />
+                    }
+                    {state.step1.role === "netrunner" &&
+                        <NetrunnerLifepathForm
+                        data={state.step3 as NetrunnerLifepathFormData}
+                        onFormSubmit={(data) => handleStepSubmit("step3", data)}
+                        onPreviousClick={() => handlePrevStep()}
+                        />
+                    }
+                    {state.step1.role === "tech" &&
+                        <TechLifepathForm
+                        data={state.step3 as TechLifepathFormData}
+                        onFormSubmit={(data) => handleStepSubmit("step3", data)}
+                        onPreviousClick={() => handlePrevStep()}
+                        />
+                    }
+                    {state.step1.role === "medtech" &&
+                        <MedtechLifepathForm
+                        data={state.step3 as MedtechLifepathFormData}
                         onFormSubmit={(data) => handleStepSubmit("step3", data)}
                         onPreviousClick={() => handlePrevStep()}
                         />

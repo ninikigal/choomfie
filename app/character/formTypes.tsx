@@ -58,6 +58,42 @@ export interface SoloLifepathFormData {
     opposition: string | null;
 }
 
+export interface NetrunnerLifepathFormData {
+    type: string | null;
+    hasPartner: boolean | null;
+    partnerType: string | null;
+    workspace: string | null;
+    clients: string | null;
+    getsProgramsAt: string | null;
+    opposition: string | null;
+}
+
+export interface TechLifepathFormData {
+    type: string | null;
+    hasPartner: boolean | null;
+    partnerType: string | null;
+    workspace: string | null;
+    clients: string | null;
+    getsSuppliesAt: string | null;
+    opposition: string | null;
+}
+
+export interface MedtechLifepathFormData {
+    type: string | null;
+    hasPartner: boolean | null;
+    partnerType: string | null;
+    workspace: string | null;
+    clients: string | null;
+    getsSuppliesAt: string | null;
+}
+
+export interface MediaLifepathFormData {
+    type: string | null;
+    publication: string | null;
+    ethics: string | null;
+    story: string | null;
+}
+
 export type CultureFormData = Pick<LifepathFormData, "culturalOrigin" | "languages">
 
 export type FormData = {
@@ -65,7 +101,11 @@ export type FormData = {
     lifepath: LifepathFormData;
     roleLifepath:
         | RockerLifepathFormData
-        | SoloLifepathFormData;
+        | SoloLifepathFormData
+        | NetrunnerLifepathFormData
+        | TechLifepathFormData
+        | MedtechLifepathFormData
+        | MediaLifepathFormData
 }
 
 export function createEmptyStepData<T extends keyof FormData>(step: T, role?: string): FormData[T] {
@@ -113,6 +153,42 @@ export function createEmptyStepData<T extends keyof FormData>(step: T, role?: st
                         moralCompass: null,
                         territory: null,
                         opposition: null,
+                    } as FormData[T]
+                case "netrunner":
+                    return {
+                        type: null,
+                        hasPartner: null,
+                        partnerType: null,
+                        workspace: null,
+                        clients: null,
+                        getsProgramsAt: null,
+                        opposition: null,
+                    } as FormData[T]
+                case "tech":
+                    return {
+                        type: null,
+                        hasPartner: null,
+                        partnerType: null,
+                        workspace: null,
+                        clients: null,
+                        getsSuppliesAt: null,
+                        opposition: null,
+                    } as FormData[T]
+                case "medtech":
+                    return {
+                        type: null,
+                        hasPartner: null,
+                        partnerType: null,
+                        workspace: null,
+                        clients: null,
+                        getsSuppliesAt: null
+                    } as FormData[T]
+                case "media":
+                    return {
+                        type: null,
+                        publication: null,
+                        ethics: null,
+                        story: null,
                     } as FormData[T]
                 default:
                     throw new Error(`Unknown role ${role}`);

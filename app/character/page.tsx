@@ -43,6 +43,13 @@ const initialState: FormData & { currentStep: number } = {
     step3: createEmptyStepData("roleLifepath", "")
 }
 
+const preparePayload = (state: typeof initialState) => {
+    return {
+        role: state.step1.role,
+        cultural_origin: state.step2.culturalOrigin,
+    }
+}
+
 function formReducer(state: typeof initialState, action: FormAction) {
     switch (action.type) {
         case "UPDATE_STEP":
@@ -65,6 +72,7 @@ function formReducer(state: typeof initialState, action: FormAction) {
     }
 }
 
+
 export default function CharacterPage() {
     const [state, dispatch] = useReducer(formReducer, initialState);
 
@@ -77,8 +85,28 @@ export default function CharacterPage() {
         dispatch({ type: "PREV_STEP" });
     }
 
-    const handleFormSubmit = () => {
-        console.log("Form Submitted:", state);
+    const handleFormSubmit = async () => {
+        const payload = preparePayload(state);
+        console.log(payload);
+
+        try {
+            const response = await fetch('http://localhost:8000/api/characters/', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.status}`)
+            }
+
+            const result = await response.json();
+            console.log('Form submitted successfully:', result);
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
     }
 
     return (
@@ -172,8 +200,10 @@ export default function CharacterPage() {
                     <button onClick={handlePrevStep}>goback</button>
                 </div>
             )}
+            
             {state.currentStep === 4 && <h1>done brah</h1>}
 
+            <button onClick={handleFormSubmit}>SUBMIT COMPLETELY</button>
             {/* Debug section */}
             <div style={{ marginTop: '20px', padding: '10px', border: '1px solid #ccc' }}>
                 <h2>Debug: Current State</h2>

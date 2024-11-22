@@ -9,6 +9,7 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+venv
 
 # testing
 /coverage
@@ -38,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# etc
+playground

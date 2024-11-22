@@ -26,7 +26,7 @@ interface LifepathFormProps {
 }
 
 export default function LifepathForm({ data, onFormSubmit, onPreviousClick}: LifepathFormProps) {
-    const [subStep, setSubStep] = useState<number>(15);
+    const [subStep, setSubStep] = useState<number>(1);
 
     const { setValue, handleSubmit } = useForm<LifepathFormData>({
         defaultValues: data

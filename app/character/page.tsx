@@ -1,7 +1,24 @@
 "use client"
 import { useReducer } from "react";
-import { RoleFormData, LifepathFormData, createEmptyStepData, RockerLifepathFormData, SoloLifepathFormData, NetrunnerLifepathFormData, TechLifepathFormData, MedtechLifepathFormData, MediaLifepathFormData, ExecLifepathFormData, LawmanLifepathFormData, FixerLifepathFormData, NomadLifepathFormData } from "./formTypes";
+import { 
+    MethodFormData, 
+    RoleFormData, 
+    LifepathFormData, 
+    createEmptyStepData, 
+    RockerLifepathFormData, 
+    SoloLifepathFormData, 
+    NetrunnerLifepathFormData, 
+    TechLifepathFormData, 
+    MedtechLifepathFormData, 
+    MediaLifepathFormData, 
+    ExecLifepathFormData, 
+    LawmanLifepathFormData, 
+    FixerLifepathFormData, 
+    NomadLifepathFormData, 
+    StatsFormData
+} from "./formTypes";
 
+import MethodForm from "./method";
 import RoleForm from "./role";
 import LifepathForm from "./lifepath";
 import SoloLifepathForm from "./role-forms/SoloLifepathForm";
@@ -14,8 +31,10 @@ import ExecLifepathForm from "./role-forms/ExecLifepathForm";
 import LawmanLifepathForm from "./role-forms/LawmanLifepathForm";
 import FixerLifepathForm from "./role-forms/FixerLifepathForm";
 import NomadLifepathForm from "./role-forms/NomadLifepathForm";
+import StatsForm from "./stats";
 
 interface FormData {
+    step0: MethodFormData
     step1: RoleFormData,
     step2: LifepathFormData
     step3:
@@ -29,6 +48,7 @@ interface FormData {
         | LawmanLifepathFormData
         | FixerLifepathFormData
         | NomadLifepathFormData
+    step4: StatsFormData
 }
 
 type FormAction = 
@@ -37,10 +57,12 @@ type FormAction =
     | { type: "PREV_STEP" };
 
 const initialState: FormData & { currentStep: number } = {
-    currentStep: 1, 
+    currentStep: 4,
+    step0: createEmptyStepData("method"),
     step1: createEmptyStepData("role"),
     step2: createEmptyStepData("lifepath"),
-    step3: createEmptyStepData("roleLifepath", "")
+    step3: createEmptyStepData("roleLifepath", ""),
+    step4: createEmptyStepData("stats")
 }
 
 const preparePayload = (state: typeof initialState) => {
@@ -64,9 +86,9 @@ function formReducer(state: typeof initialState, action: FormAction) {
                 }),
             };
         case "NEXT_STEP":
-            return { ...state, currentStep: Math.min(state.currentStep + 1, 3) };
+            return { ...state, currentStep: Math.min(state.currentStep + 1, 4) };
         case "PREV_STEP":
-            return { ...state, currentStep: Math.max(state.currentStep -1, 1 ) };
+            return { ...state, currentStep: Math.max(state.currentStep - 1, 0 ) };
         default:
             return state;
     }
@@ -112,10 +134,17 @@ export default function CharacterPage() {
     return (
         <div>
             <h1>Step {state.currentStep}</h1>
+            {state.currentStep === 0 && (
+                <MethodForm
+                    data={state.step0}
+                    onFormSubmit={(data) => handleStepSubmit("step0", data)}
+                />
+            )}
             {state.currentStep === 1 && (
                 <RoleForm
                     data={state.step1}
                     onFormSubmit={(data) => handleStepSubmit("step1", data)}
+                    onPreviousClick={() => handlePrevStep()}
                 />
             )}
             {state.currentStep === 2 && (
@@ -200,8 +229,14 @@ export default function CharacterPage() {
                     <button onClick={handlePrevStep}>goback</button>
                 </div>
             )}
-            
-            {state.currentStep === 4 && <h1>done brah</h1>}
+            {state.currentStep === 4 && 
+                <StatsForm
+                    data={state.step4}
+                    method={state.step0.method}
+                    onFormSubmit={(data) => handleStepSubmit("step4", data)}
+                    onPreviousClick={() => handlePrevStep()}
+                />
+            }
 
             <button onClick={handleFormSubmit}>SUBMIT COMPLETELY</button>
             {/* Debug section */}

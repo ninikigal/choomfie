@@ -1,3 +1,7 @@
+export interface MethodFormData {
+    method: "streetrat" | "edgerunner" | "complete"
+}
+
 export interface RoleFormData {
     role: "" 
     | "rockerboy" | "solo" | "netrunner" | "tech" | "medtech"
@@ -129,9 +133,23 @@ export interface NomadLifepathFormData {
     opposition: string | null;
 }
 
+export interface StatsFormData {
+    intelligence: number;
+    willpower: number;
+    cool: number;
+    empathy: number;
+    technique: number;
+    reflexes: number;
+    luck: number;
+    body: number;
+    dexterity: number;
+    movement: number; 
+}
+
 export type CultureFormData = Pick<LifepathFormData, "culturalOrigin" | "languages">
 
 export type FormData = {
+    method: MethodFormData;
     role: RoleFormData;
     lifepath: LifepathFormData;
     roleLifepath:
@@ -145,10 +163,13 @@ export type FormData = {
         | LawmanLifepathFormData
         | FixerLifepathFormData
         | NomadLifepathFormData
+    stats: StatsFormData
 }
 
 export function createEmptyStepData<T extends keyof FormData>(step: T, role?: string): FormData[T] {
     switch(step) {
+        case "method":
+            return { method: "streetrat" } as FormData[T]
         case "role":
             return { role: "" } as FormData[T];
         case "lifepath":
@@ -267,6 +288,19 @@ export function createEmptyStepData<T extends keyof FormData>(step: T, role?: st
                 default:
                     throw new Error(`Unknown role ${role}`);
             }
+        case "stats":
+            return {
+                intelligence: 2,
+                willpower: 2,
+                cool: 2,
+                empathy: 2,
+                technique: 2,
+                reflexes: 2,
+                luck: 2,
+                body: 2,
+                dexterity: 2,
+                movement: 2
+            } as FormData[T]
         default:
             throw new Error(`Unknown Step ${step}`);
     }

@@ -6,6 +6,7 @@ import { RoleFormData } from './formTypes';
 interface RoleFormProps {
   data: RoleFormData;
   onFormSubmit: (data: RoleFormData) => void;
+  onPreviousClick: () => void;
 }
 
 const roles = [
@@ -21,7 +22,7 @@ const roles = [
   "nomad"
 ];
 
-export default function RoleForm({ data, onFormSubmit }: RoleFormProps) {
+export default function RoleForm({ data, onFormSubmit, onPreviousClick }: RoleFormProps) {
   const { setValue, handleSubmit } = useForm<RoleFormData>({
     defaultValues: data
   });
@@ -39,6 +40,7 @@ export default function RoleForm({ data, onFormSubmit }: RoleFormProps) {
       ))}
       
       <button type="submit">Next</button>
+      <button onClick={onPreviousClick}>BACK</button>
     </form>
   );
 }

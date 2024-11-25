@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form";
 import { StatsFormData, MethodFormData } from "./formTypes"
 
@@ -15,14 +15,24 @@ interface StatsFormProps {
 export default function StatsForm({data, method, onFormSubmit, onPreviousClick, }: StatsFormProps) {
     
     const initialPoints = 62;
-    const [availablePoints, setAvailablePoints] = useState(62);
-    const { register, handleSubmit } = useForm<StatsFormData>({
+    const [availablePoints, setAvailablePoints] = useState(initialPoints);
+    const { register, getValues, handleSubmit } = useForm<StatsFormData>({
         defaultValues: data
     })
 
-    const handleStatChange = (e: any) => {
-        console.log(e.target.value);
+    const recalculatePoints = () => {
+        const values = getValues();
+        const totalSpent = Object.values(values).reduce(
+            (sum, val) => sum + (Number(val) || 0),
+            0
+        )
+
+        setAvailablePoints(initialPoints - totalSpent);
     }
+
+    useEffect(() => {
+        recalculatePoints();
+    }, [])
 
     return (
         <div>
@@ -31,55 +41,113 @@ export default function StatsForm({data, method, onFormSubmit, onPreviousClick, 
                 <label>int</label>
                 <input
                     type="number"
-                    {...register("intelligence")}
-                    onChange={(e) => handleStatChange(e)}
+                    {...register("intelligence", {
+                        valueAsNumber: true,
+                        onChange: recalculatePoints,
+                        max: 8
+                    })}
+                    max={8}
+                    min={2}
                 />
                 <label>ref</label>
                 <input
                     type="number"
-                    {...register("reflexes")}
+                    {...register("reflexes",{
+                        valueAsNumber: true,
+                        onChange: recalculatePoints,
+                        max: 8
+                    })}
+                    max={8}
+                    min={2}
                 />
                 <label>dex</label>
                 <input
                     type="number"
-                    {...register("dexterity")}
+                    {...register("dexterity",{
+                        valueAsNumber: true,
+                        onChange: recalculatePoints,
+                        max: 8
+                    })}
+                    max={8}
+                    min={2}
                 />
                 <label>tech</label>
                 <input
                     type="number"
-                    {...register("technique")}
+                    {...register("technique",{
+                        valueAsNumber: true,
+                        onChange: recalculatePoints,
+                        max: 8
+                    })}
+                    max={8}
+                    min={2}
                 />
                 <label>cool</label>
                 <input
                     type="number"
-                    {...register("cool")}
+                    {...register("cool",{
+                        valueAsNumber: true,
+                        onChange: recalculatePoints,
+                        max: 8
+                    })}
+                    max={8}
+                    min={2}
                 />
             
                 <label>will</label>
                 <input
                     type="number"
-                    {...register("willpower")}
+                    {...register("willpower",{
+                        valueAsNumber: true,
+                        onChange: recalculatePoints,
+                        max: 8
+                    })}
+                    max={8}
+                    min={2}
                 />
                 <label>luck</label>
                 <input
                     type="number"
-                    {...register("luck")}
+                    {...register("luck",{
+                        valueAsNumber: true,
+                        onChange: recalculatePoints,
+                        max: 8
+                    })}
+                    max={8}
+                    min={2}
                 />
                 <label>move</label>
                 <input 
                     type="number"
-                    {...register("movement")}
-                    
+                    {...register("movement",{
+                        valueAsNumber: true,
+                        onChange: recalculatePoints,
+                        max: 8
+                    })}
+                    max={8}
+                    min={2}
                 />
                 <label>body</label>
                 <input
                     type="number" 
-                    {...register("body")}
+                    {...register("body",{
+                        valueAsNumber: true,
+                        onChange: recalculatePoints,
+                        max: 8
+                    })}
+                    max={8}
+                    min={2}
                 />
                 <label>emp</label>
                 <input 
                     type="number"
-                    {...register("empathy")}
+                    {...register("empathy",{
+                        valueAsNumber: true,
+                        onChange: recalculatePoints,
+                        max: 8
+                    })}
+                    max={8}
+                    min={2}
                 />
                 <button>submit stats</button>
             </form>

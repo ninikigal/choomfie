@@ -134,16 +134,114 @@ export interface NomadLifepathFormData {
 }
 
 export interface StatsFormData {
-    intelligence: number;
-    willpower: number;
-    cool: number;
-    empathy: number;
-    technique: number;
-    reflexes: number;
-    luck: number;
-    body: number;
-    dexterity: number;
-    movement: number; 
+    intelligence: number | null;
+    willpower: number | null;
+    cool: number | null;
+    empathy: number | null;
+    technique: number | null;
+    reflexes: number | null;
+    luck: number | null;
+    body: number | null;
+    dexterity: number | null;
+    movement: number | null;
+}
+
+export interface languageSkill {
+    name: string | null;
+    skillPoints: number | null; 
+}
+
+export interface localExpertSkill {
+    name: string | null;
+    skillPoints: number | null; 
+}
+
+export interface scienceSkill {
+    name: string | null;
+    skillPoints: number | null; 
+}
+
+export interface playInstrumentSkill {
+    name: string | null;
+    skillPoints: number | null; 
+}
+
+export interface SkillsFormData {
+    // awareness skills
+    concentration: number | null;
+    conealRevealObject: number | null;
+    lipReading: number | null;
+    perception: number | null;
+    tracking: number | null;
+    // body skills
+    athletics: number | null;
+    contortionist: number | null;
+    dance: number | null;
+    endurance: number | null;
+    resistTortureDrugs: number | null;
+    stealth: number | null;
+    // control skills
+    driveLandVehicle: number | null;
+    pilotAirVehicle: number | null;
+    pilotSeaVehicle: number | null;
+    riding: number | null;
+    // education skills
+    accounting: number | null;
+    animalHandling: number | null;
+    bureaucracy: number | null;
+    business: number | null;
+    composition: number | null;
+    criminology: number | null;
+    cryptography: number | null;
+    deducation: number | null;
+    education: number | null;
+    gamble: number | null;
+    language: languageSkill[] | null;
+    librarySearch: number | null;
+    localExpert: localExpertSkill[] | null;
+    science: scienceSkill[] | null;
+    tactics: number | null;
+    wildernessSurvival: number | null;
+    // fighting skills
+    brawling: number | null;
+    evasion: number | null;
+    martialArts: number | null;
+    meleeWeappon: number | null;
+    // performance skills
+    acting: number | null;
+    playInstrument: playInstrumentSkill[] | null;
+    // ranged weapon skills
+    archery: number | null;
+    autofire: number | null;
+    handgun: number | null;
+    heavyWeapons: number | null;
+    shoulderArms: number | null;
+    // social skills
+    bribery: number | null;
+    conversation: number | null;
+    humanPerception: number | null;
+    interrogation: number | null;
+    persuasion: number | null;
+    personalGrooming: number | null;
+    streetwise: number | null;
+    trading: number | null;
+    wardrobeStyle: number | null;
+    // technique skills
+    airVehicleTech: number | null;
+    basicTech: number | null;
+    cybertech: number | null;
+    demolitions: number | null;
+    electronicsSecurityTech: number | null;
+    firstAid: number | null;
+    forgery: number | null;
+    landVehicleTech: number | null;
+    paintDrawSculpt: number | null;
+    paramedic: number | null;
+    photographyFilm: number | null;
+    pickLock: number | null;
+    pickPocket: number | null;
+    seaVehicleTech: number | null;
+    weaponstech: number | null;
 }
 
 export type CultureFormData = Pick<LifepathFormData, "culturalOrigin" | "languages">
@@ -163,7 +261,8 @@ export type FormData = {
         | LawmanLifepathFormData
         | FixerLifepathFormData
         | NomadLifepathFormData
-    stats: StatsFormData
+    stats: StatsFormData;
+    skills: SkillsFormData;
 }
 
 export function createEmptyStepData<T extends keyof FormData>(step: T, role?: string): FormData[T] {
@@ -290,16 +389,94 @@ export function createEmptyStepData<T extends keyof FormData>(step: T, role?: st
             }
         case "stats":
             return {
-                intelligence: 2,
-                willpower: 2,
-                cool: 2,
-                empathy: 2,
-                technique: 2,
-                reflexes: 2,
-                luck: 2,
-                body: 2,
-                dexterity: 2,
-                movement: 2
+                intelligence: null,
+                willpower: null,
+                cool: null,
+                empathy: null,
+                technique: null,
+                reflexes: null,
+                luck: null,
+                body: null,
+                dexterity: null,
+                movement: null,
+            } as FormData[T]
+        case "skills":
+            return {
+                    // awareness skills
+                    concentration: null,
+                    conealRevealObject: null,
+                    lipReading: null,
+                    perception: null,
+                    tracking: null,
+                    // body skills
+                    athletics: null,
+                    contortionist: null,
+                    dance: null,
+                    endurance: null,
+                    resistTortureDrugs: null,
+                    stealth: null,
+                    // control skills
+                    driveLandVehicle: null,
+                    pilotAirVehicle: null,
+                    pilotSeaVehicle: null,
+                    riding: null,
+                    // education skills
+                    accounting: null,
+                    animalHandling: null,
+                    bureaucracy: null,
+                    business: null,
+                    composition: null,
+                    criminology: null,
+                    cryptography: null,
+                    deducation: null,
+                    education: null,
+                    gamble: null,
+                    language: null,
+                    librarySearch: null,
+                    localExpert: null,
+                    science: null,
+                    tactics: null,
+                    wildernessSurvival: null,
+                    // fighting skills
+                    brawling: null,
+                    evasion: null,
+                    martialArts: null,
+                    meleeWeappon: null,
+                    // performance skills
+                    acting: null,
+                    playInstrument: null,
+                    // ranged weapon skills
+                    archery: null,
+                    autofire: null,
+                    handgun: null,
+                    heavyWeapons: null,
+                    shoulderArms: null,
+                    // social skills
+                    bribery: null,
+                    conversation: 2,
+                    humanPerception: null,
+                    interrogation: null,
+                    persuasion: null,
+                    personalGrooming: null,
+                    streetwise: null,
+                    trading: null,
+                    wardrobeStyle: null,
+                    // technique skills
+                    airVehicleTech: null,
+                    basicTech: null,
+                    cybertech: null,
+                    demolitions: null,
+                    electronicsSecurityTech: null,
+                    firstAid: null,
+                    forgery: null,
+                    landVehicleTech: null,
+                    paintDrawSculpt: null,
+                    paramedic: null,
+                    photographyFilm: null,
+                    pickLock: null,
+                    pickPocket: null,
+                    seaVehicleTech: null,
+                    weaponstech: null,
             } as FormData[T]
         default:
             throw new Error(`Unknown Step ${step}`);

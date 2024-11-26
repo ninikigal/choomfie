@@ -15,7 +15,8 @@ import {
     LawmanLifepathFormData, 
     FixerLifepathFormData, 
     NomadLifepathFormData, 
-    StatsFormData
+    StatsFormData,
+    SkillsFormData,
 } from "./formTypes";
 
 import MethodForm from "./method";
@@ -32,11 +33,12 @@ import LawmanLifepathForm from "./role-forms/LawmanLifepathForm";
 import FixerLifepathForm from "./role-forms/FixerLifepathForm";
 import NomadLifepathForm from "./role-forms/NomadLifepathForm";
 import StatsForm from "./stats";
+import SkillsForm from "./skills";
 
 interface FormData {
-    step0: MethodFormData
-    step1: RoleFormData,
-    step2: LifepathFormData
+    step0: MethodFormData;
+    step1: RoleFormData;
+    step2: LifepathFormData;
     step3:
         | RockerLifepathFormData
         | SoloLifepathFormData
@@ -47,8 +49,9 @@ interface FormData {
         | ExecLifepathFormData
         | LawmanLifepathFormData
         | FixerLifepathFormData
-        | NomadLifepathFormData
-    step4: StatsFormData
+        | NomadLifepathFormData;
+    step4: StatsFormData;
+    step5: SkillsFormData;
 }
 
 type FormAction = 
@@ -57,12 +60,13 @@ type FormAction =
     | { type: "PREV_STEP" };
 
 const initialState: FormData & { currentStep: number } = {
-    currentStep: 4,
+    currentStep: 5,
     step0: createEmptyStepData("method"),
     step1: createEmptyStepData("role"),
     step2: createEmptyStepData("lifepath"),
     step3: createEmptyStepData("roleLifepath", ""),
-    step4: createEmptyStepData("stats")
+    step4: createEmptyStepData("stats"),
+    step5: createEmptyStepData("skills")
 }
 
 const preparePayload = (state: typeof initialState) => {
@@ -86,9 +90,9 @@ function formReducer(state: typeof initialState, action: FormAction) {
                 }),
             };
         case "NEXT_STEP":
-            return { ...state, currentStep: Math.min(state.currentStep + 1, 4) };
+            return { ...state, currentStep: Math.min(state.currentStep + 1, 5) };
         case "PREV_STEP":
-            return { ...state, currentStep: Math.max(state.currentStep - 1, 0 ) };
+            return { ...state, currentStep: Math.max(state.currentStep - 1, 0) };
         default:
             return state;
     }
@@ -234,6 +238,14 @@ export default function CharacterPage() {
                     data={state.step4}
                     method={state.step0.method}
                     onFormSubmit={(data) => handleStepSubmit("step4", data)}
+                    onPreviousClick={() => handlePrevStep()}
+                />
+            }
+            {state.currentStep === 5 && 
+                <SkillsForm
+                    data={state.step5}
+                    method={state.step0.method}
+                    onFormSubmit={(data) => handleStepSubmit("step5", data)}
                     onPreviousClick={() => handlePrevStep()}
                 />
             }

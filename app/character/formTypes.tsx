@@ -146,24 +146,10 @@ export interface StatsFormData {
     movement: number | null;
 }
 
-export interface languageSkill {
-    name: string | null;
-    skillPoints: number | null; 
-}
 
-export interface localExpertSkill {
+export interface CustomSkill {
     name: string | null;
-    skillPoints: number | null; 
-}
-
-export interface scienceSkill {
-    name: string | null;
-    skillPoints: number | null; 
-}
-
-export interface playInstrumentSkill {
-    name: string | null;
-    skillPoints: number | null; 
+    skillPoints: number | null;
 }
 
 export interface SkillsFormData {
@@ -196,10 +182,10 @@ export interface SkillsFormData {
     deducation: number | null;
     education: number | null;
     gamble: number | null;
-    language: languageSkill[] | null;
+    language: CustomSkill[] | null;
     librarySearch: number | null;
-    localExpert: localExpertSkill[] | null;
-    science: scienceSkill[] | null;
+    localExpert: CustomSkill[] | null;
+    science: CustomSkill[] | null;
     tactics: number | null;
     wildernessSurvival: number | null;
     // fighting skills
@@ -209,7 +195,7 @@ export interface SkillsFormData {
     meleeWeappon: number | null;
     // performance skills
     acting: number | null;
-    playInstrument: playInstrumentSkill[] | null;
+    playInstrument: CustomSkill[] | null;
     // ranged weapon skills
     archery: number | null;
     autofire: number | null;
@@ -453,7 +439,7 @@ export function createEmptyStepData<T extends keyof FormData>(step: T, role?: st
                     shoulderArms: null,
                     // social skills
                     bribery: null,
-                    conversation: 2,
+                    conversation: null,
                     humanPerception: null,
                     interrogation: null,
                     persuasion: null,
